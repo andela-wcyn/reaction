@@ -17,6 +17,12 @@ set -e
 # $DOCKER_NAMESPACE_DEV - the name image for development deployments [Default]: reactioncommerce/prequel
 
 
+if [[ "$CIRCLE_BRANCH" != "master" || "$CIRCLE_BRANCH" != "development" ]]; then
+  echo "Not running a deployment branch."
+  exit 0
+fi
+
+
 ## Development
 if [[ "$CIRCLE_BRANCH" == "development" ]]; then
   DOCKER_NAMESPACE=${DOCKER_NAMESPACE:-"reactioncommerce/reaction"}
