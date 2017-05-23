@@ -28,6 +28,6 @@ jobs:
           command: .circleci/deploy.sh
 
       - save_cache:
-        key: meteor
-        paths:
-          - ~/.meteor
+          key: meteor
+          paths:
+            - ~/.meteor
