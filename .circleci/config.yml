@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - restore_cache:
-        key: meteor
+          key: meteor
 
       - checkout
 
