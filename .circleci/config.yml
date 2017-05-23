@@ -9,7 +9,6 @@ jobs:
 
     environment:
       - METEOR_ALLOW_SUPERUSER: true
-      - LC_ALL: en_US.UTF-8
 
     steps:
       - restore_cache:
@@ -18,6 +17,9 @@ jobs:
       - checkout
 
       # install dependencies
+      - run: apt-get update && apt-get install -y locales
+      - run: locale-gen en_US.UTF-8
+      - run: localedef -i en_GB -f UTF-8 en_US.UTF-8
       - run: if [[ -L ~/.meteor/meteor ]]; then ln -s ~/.meteor/meteor ~/bin/meteor; export PATH="$PATH:~/bin"; fi
       - run: hash meteor 2>/dev/null || curl https://install.meteor.com | /bin/sh
       - run: npm i -g reaction-cli
