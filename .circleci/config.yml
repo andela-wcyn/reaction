@@ -14,17 +14,12 @@ jobs:
       - restore_cache:
           key: meteor
 
+      # install OS dependencies
+      - run: .circleci/install.sh
+
       - checkout
 
-      # fix Meteor/Mongo locale issue on Debian
-      # https://github.com/meteor/meteor/issues/4019
-      - run: apt-get update && apt-get install -y locales
-      - run: locale-gen en_US.UTF-8
-      - run: localedef -i en_GB -f UTF-8 en_US.UTF-8
-
-      # install dependencies
-      - run: hash meteor 2>/dev/null || curl https://install.meteor.com | /bin/sh
-      - run: npm i -g reaction-cli
+      # install app dependencies
       - run: meteor npm install
 
       # run tests
