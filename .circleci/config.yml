@@ -1,0 +1,33 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/reaction
+
+    docker:
+      - image: node:7
+
+    steps:
+      - restore_cache:
+        key: meteor
+
+      - checkout
+
+      # install dependencies
+      - run: if [[ -L ~/.meteor/meteor ]]; then ln -s ~/.meteor/meteor ~/bin/meteor; export PATH="$PATH:~/bin"; fi
+      - run: hash meteor 2>/dev/null || curl https://install.meteor.com | /bin/sh
+      - run: npm i -g reaction-cli
+      - run: meteor npm install
+
+      # run tests
+      - run: reaction test
+      - run: .circleci/build.sh
+
+      - deploy:
+          name: Docker Image Deploment
+          command: .circleci/deploy.sh
+
+      - save_cache:
+        key: meteor
+        paths:
+          - ~/.meteor
