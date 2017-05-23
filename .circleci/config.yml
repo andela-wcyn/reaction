@@ -2,7 +2,7 @@ version: 2
 
 jobs:
   build:
-    working_directory: ~/reaction
+    working_directory: /home/reaction
 
     docker:
       - image: node:7
