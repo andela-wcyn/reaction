@@ -7,6 +7,10 @@ jobs:
     docker:
       - image: node:7
 
+    environment:
+      - METEOR_ALLOW_SUPERUSER: true
+      - LC_ALL: en_US.UTF-8
+
     steps:
       - restore_cache:
           key: meteor
