@@ -23,7 +23,6 @@ jobs:
       - run: localedef -i en_GB -f UTF-8 en_US.UTF-8
 
       # install dependencies
-      - run: if [[ -f ~/.meteor/meteor ]]; then mkdir ~/bin; ln -s ~/.meteor/meteor ~/bin/meteor; export PATH="$PATH:~/bin"; fi
       - run: hash meteor 2>/dev/null || curl https://install.meteor.com | /bin/sh
       - run: npm i -g reaction-cli
       - run: meteor npm install
@@ -40,3 +39,4 @@ jobs:
           key: meteor
           paths:
             - ~/.meteor
+            - /usr/local/bin
