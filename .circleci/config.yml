@@ -11,13 +11,14 @@ jobs:
       - METEOR_ALLOW_SUPERUSER: true
 
     steps:
+      - setup_remote_docker
+      - checkout
+
       - restore_cache:
           key: meteor
 
       # install OS dependencies
       - run: .circleci/install.sh
-
-      - checkout
 
       # install app dependencies
       - run: meteor npm install
